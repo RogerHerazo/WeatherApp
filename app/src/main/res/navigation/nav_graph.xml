@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cityList">
+
+    <fragment
+        android:id="@+id/cityList"
+        android:name="com.example.weatherapp.CityList"
+        android:label="fragment_city_list"
+        tools:layout="@layout/fragment_city_list" >
+        <action
+            android:id="@+id/action_cityList_to_temperatureList"
+            app:destination="@id/temperatureList" />
+    </fragment>
+    <fragment
+        android:id="@+id/temperatureList"
+        android:name="com.example.weatherapp.TemperatureList"
+        android:label="fragment_temperature_list"
+        tools:layout="@layout/fragment_temperature_list" />
+</navigation>
