@@ -38,9 +38,8 @@ import org.json.JSONObject
         fun getCities() = cities
 
         fun getJsonObject(): JsonObjectRequest {
-            val apiKey = "9bef5f86715e6e9f366b795066a4e58b"
             val url =
-                "https://api.openweathermap.org/data/2.5//group?id=3689147,3688689,3688465,3687925,3687238,3685533,3674962,3672486,3668605,3666304&units=metric&appid=$apiKey"
+                "https://api.openweathermap.org/data/2.5//group?id=3689147,3688689,3688465,3687925,3687238,3685533,3674962,3672486,3668605,3666304&units=metric&appid=9bef5f86715e6e9f366b795066a4e58b"
 
             return JsonObjectRequest(
                 Request.Method.GET, url, null,

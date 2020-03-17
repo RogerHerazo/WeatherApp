@@ -37,8 +37,7 @@ class DayDao private constructor(var context: Context) {
     fun getDays() = days
 
     fun getJsonObject(city: String) : JsonObjectRequest {
-        val apiKey = "9bef5f86715e6e9f366b795066a4e58b"
-        val url = "https://api.openweathermap.org/data/2.5/forecast?q=$city&units=metric&appid=$apiKey"
+        val url = "https://api.openweathermap.org/data/2.5/forecast?q=$city&units=metric&appid=9bef5f86715e6e9f366b795066a4e58b"
 
         return JsonObjectRequest(
             Request.Method.GET, url, null,

@@ -7,22 +7,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherapp.data.CityViewModel
 import com.example.weatherapp.data.DCity
 import kotlinx.android.synthetic.main.fragment_city_list.view.*
+
 
 /**
  * A simple [Fragment] subclass.
  */
-class CityList : Fragment(), View.OnClickListener, RecycleViewAdapter.onListInteraction   {
+class CityList : Fragment(), View.OnClickListener, RecycleViewAdapter.onListInteraction{
 
 
     private lateinit var navController: NavController
+    private lateinit var viewModel: CityViewModel
     lateinit var Quilla: DCity
     lateinit var Cgena: DCity
     var dcity = mutableListOf<DCity>()
+    private var dcitytemp = mutableListOf<DCity>()
     private var adapter: RecycleViewAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +37,30 @@ class CityList : Fragment(), View.OnClickListener, RecycleViewAdapter.onListInte
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_city_list, container, false)
-        dcity = mutableListOf<DCity>()
-        dcity.add(DCity("Barranquilla", "30"))
-        dcity.add(DCity("Cartagena", "25"))
+        //dcity = mutableListOf<DCity>()
+        //dcity.add(DCity("Barranquilla", "30"))
+        //dcity.add(DCity("Cartagena", "25"))
+
+
+
+        viewModel = ViewModelProvider(this).get(CityViewModel::class.java)
+
+        viewModel.addCities()
+
+        viewModel.getCities().observe(viewLifecycleOwner, Observer { resultcities ->
+            run{
+                dcitytemp = resultcities as MutableList<DCity>
+
+                dcity.clear()
+                for (city in dcitytemp){
+                    dcity.add(DCity(
+                        city.nombre,
+                        city.temperatura
+                    ))
+                }
+            }
+            adapter!!.updateData()
+        })
 
         adapter = RecycleViewAdapter(dcity, this)
 
@@ -40,7 +68,7 @@ class CityList : Fragment(), View.OnClickListener, RecycleViewAdapter.onListInte
         view.citylist.adapter = adapter
 
         //view.floatingActionButton.setOnClickListener{
-            //VolleySingleton.getInstance(activity!!.applicationContext).addToRequestQueue(getJsonObjectRequest())
+
         //}
         return view
     }

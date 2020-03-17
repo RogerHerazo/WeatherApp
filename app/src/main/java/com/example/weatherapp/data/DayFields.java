@@ -13,7 +13,7 @@ public class DayFields {
         try {
             JSONArray list = response.getJSONArray("list");
 
-            for (int i = 0; i < list.length(); i = i + 6) {
+            for (int i = 0; i < list.length(); i ++) {
 
                 JSONObject obj = list.getJSONObject(i);
 
