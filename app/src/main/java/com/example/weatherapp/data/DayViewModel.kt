@@ -6,17 +6,17 @@ import androidx.lifecycle.MutableLiveData
 
 class DayViewModel (application: Application) : AndroidViewModel(application) {
 
-    private var daysDao : DayDao
+    private var dayDao : DayDao
 
     init {
-        daysDao = DayDao.getInstance(this.getApplication())
+        dayDao = DayDao.getInstance(this.getApplication())
     }
 
     fun addCityDays(city : String) {
-        daysDao.addDays(city)
+        dayDao.addDays(city)
     }
 
     fun getCityDays(): MutableLiveData<List<DTemp>> {
-        return daysDao.getDays()
+        return dayDao.getDays()
     }
 }

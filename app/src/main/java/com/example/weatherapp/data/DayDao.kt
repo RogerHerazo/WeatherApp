@@ -23,10 +23,10 @@ class DayDao private constructor(var context: Context) {
 
     companion object {
         @Volatile
-        private var INSTANCE : DaysDao? = null
+        private var INSTANCE : DayDao? = null
         fun getInstance(context: Context) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: DaysDao(context).also {INSTANCE = it}
+                INSTANCE ?: DayDao(context).also {INSTANCE = it}
             }
     }
 
